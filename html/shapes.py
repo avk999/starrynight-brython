@@ -1,6 +1,4 @@
 import random
-import math
-
 
 class Building:
     
@@ -86,10 +84,7 @@ class Star:
         self.color="#000000"
         self.on()
 
-    def __del__(self):
-        self.off()
-        print("I died")
-
+    
 
 class Window:
     WINDOW_WIDTH=4
