@@ -40,7 +40,6 @@ class Building:
         self.window_columns=int(self.width/self.window_interval)
         self.n_floors=int(self.height/floor_height)
         #self.build()
-        print(f"Built at x0={x0}, height={self.height}, x1={self.x1}, width={self.width}")
         return
     def build(self):
         ctx=self.canvas.getContext("2d")
