@@ -35,6 +35,7 @@ while bx < x:
     buildings.append(bldg)
     max_windows+=bldg.n_floors*bldg.window_columns
 building_footprints=list(map(lambda x: x.width, buildings))
+building_heights=list(map(lambda x: x.height, buildings))
     
 print("Built {} buildings".format(len(buildings)))
 print(f"Max number of windows: {max_windows}")
@@ -72,7 +73,7 @@ def addstar(stars):
 def addwindow(buildings, windows):
     global windows_collisions
     #bldg=random.choices(buildings, weights=building_footprints, k=1)[0]
-    bldg=random.choices(buildings, k=1)[0]
+    bldg=random.choices(buildings, weights=building_heights, k=1)[0]
 
     win=Window(canvas,bldg)
     for w in windows:
