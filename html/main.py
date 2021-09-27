@@ -94,6 +94,6 @@ def print_stats():
     print(f"Window collisions: {windows_collisions}")
 
 timer.set_interval(addstar,100, stars)
-timer.set_interval(addwindow,60,buildings,windows)
-timer.set_interval(kill,50,stars,windows)
+timer.set_interval(addwindow,100,buildings,windows)
+timer.set_interval(kill,90,stars,windows)
 timer.set_interval(print_stats,10000)
