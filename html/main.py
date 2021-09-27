@@ -11,9 +11,9 @@ canvas=document['mycanvas']
 
 BUILDING_MIN_WIDTH=x/20
 BUILDING_MAX_HEIGHT=y*0.7
-BUILDING_MIN_HEIGHT=20
+BUILDING_MIN_HEIGHT=y*0.2
 
-SAT_WIN=0.97
+SAT_WIN=0.8
 SAT_STARS=0.01
 
 buildings=[]
@@ -45,6 +45,7 @@ stars_threshold=space_for_stars*SAT_STARS
 win_threshold=max_windows*SAT_WIN
 stars_killed=0
 windows_killed=0
+windows_collisions=0
 print(f"win: {SAT_WIN}, stars: {SAT_STARS}")
 
 
@@ -60,10 +61,15 @@ def addstar(stars):
     #     print("{} stars in the sky".format(len(stars)))
 
 def addwindow(buildings, windows):
+    global windows_collisions
     #bldg=random.choices(buildings, weights=building_footprints, k=1)[0]
     bldg=random.choices(buildings, k=1)[0]
 
     win=Window(canvas,bldg)
+    for w in windows:
+        if ((win.x-w.x)**2 + (win.y-w.y)**2) < 5:
+            windows_collisions+=1
+            return
     windows.append(win)
 
 def kill(stars,windows):
@@ -85,6 +91,7 @@ def print_stats():
     print(f"Stars: {len(stars)}, space {space_for_stars}, {len(stars)/space_for_stars}")
     print(f"windows: {len(windows)}, space {max_windows}, {len(windows)/max_windows}")
     print(f"killed {stars_killed} stars and broke {windows_killed} windows")
+    print(f"Window collisions: {windows_collisions}")
 
 timer.set_interval(addstar,100, stars)
 timer.set_interval(addwindow,60,buildings,windows)

@@ -6,7 +6,7 @@ class Building:
     MU_HEIGHT = 0.2
     SIGMA_HEIGHT = 0.3
     MAX_WIDTH = 0.05
-    MU_WIDTH = 0.07
+    MU_WIDTH = 0.04
     SIGMA_WIDTH = 0.02
     
     MU_FLOOR_HEIGHT=12
