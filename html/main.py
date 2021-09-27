@@ -1,7 +1,7 @@
 from browser import document, window, timer, html
 import random
 import time
-from shapes import Star, Building, Window
+from shapes import Star, Building, Window, Navlight
 x=window.innerWidth
 y=window.innerHeight
 print(f"X={x}, Y={y}")
@@ -48,6 +48,15 @@ windows_killed=0
 windows_collisions=0
 print(f"win: {SAT_WIN}, stars: {SAT_STARS}")
 
+# where we put navlights
+highest_bldg=max(buildings, key=lambda x: x.height)
+x0,x1=(highest_bldg.x0+2, highest_bldg.x1-2)
+y0=skyline[x0]-Navlight.height
+y1=skyline[x1]-Navlight.height
+
+navlights=[]
+navlights.append(Navlight(canvas,x0,y0))
+navlights.append(Navlight(canvas,x1,y1))
 
 
 def addstar(stars):
@@ -86,6 +95,11 @@ def kill(stars,windows):
    
     return
 
+def toggle_navlights(navlights):
+    for n in navlights:
+        n.toggle()
+    return
+
 def print_stats():
     
     print(f"Stars: {len(stars)}, space {space_for_stars}, {len(stars)/space_for_stars}")
@@ -96,4 +110,5 @@ def print_stats():
 timer.set_interval(addstar,100, stars)
 timer.set_interval(addwindow,100,buildings,windows)
 timer.set_interval(kill,90,stars,windows)
+timer.set_interval(toggle_navlights,1000, navlights)
 timer.set_interval(print_stats,10000)

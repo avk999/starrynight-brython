@@ -119,3 +119,29 @@ class Window:
         self.on()
 
     
+class Navlight:
+    state=False
+    width=2
+    height=2
+    color="#F00000"
+    def __init__(self, canvas=None, x=None,y=None):
+        self.canvas=canvas
+        self.ctx=canvas.getContext("2d")
+        self.x=x 
+        self.y=y 
+        print(f"Navlight is at {x},{y}")
+        return 
+    
+    def paint(self, color):
+        
+        self.ctx.fillStyle=color 
+        self.ctx.fillRect(self.x, self.y, self.width, self.height)
+        self.ctx.fill()
+        return 
+    
+    def toggle(self):
+        color=self.color if not self.state else "#000000"
+        self.paint(color)
+        self.state=not self.state
+        return 
+
